@@ -1,0 +1,67 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.140'
+}
+
+base {
+    archivesName = 'drop2inv-neoforge'
+}
+
+version = rootProject.version
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+    withSourcesJar()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', '../common/src/main/java', '../fabric/src/main/java']
+            exclude 'com/guayand0/Drop2Inv.java'
+            exclude 'com/guayand0/Drop2InvClient.java'
+            exclude 'com/guayand0/blocks/BlockBreakHandler.java'
+            exclude 'com/guayand0/blocks/DropCancelHandler.java'
+            exclude 'com/guayand0/config/compat/**'
+            exclude 'com/guayand0/fabric/**'
+        }
+        resources {
+            srcDirs = ['src/main/resources', '../common/src/main/resources', '../fabric/src/main/resources']
+            exclude 'fabric.mod.json'
+        }
+    }
+}
+
+neoForge {
+    version = rootProject.findProperty('neoforge_version')
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+        }
+    }
+
+    mods {
+        drop2inv {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'description', rootProject.findProperty('project_description')
+
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand 'version': project.version, 'description': rootProject.findProperty('project_description')
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 25
+}

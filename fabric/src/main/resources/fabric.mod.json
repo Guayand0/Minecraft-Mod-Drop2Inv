@@ -1,0 +1,56 @@
+{
+	"schemaVersion": 1,
+	"id": "drop2inv",
+	"version": "${version}",
+
+	"name": "Drop2Inv",
+	"description": "${description}",
+	"authors": [
+		"Guayand0"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/drop2inv",
+		"sources": "https://github.com/Guayand0/Minecraft-Mod-Drop2Inv",
+		"issues": "https://github.com/Guayand0/Minecraft-Mod-Drop2Inv/issues"
+	},
+
+	"license": "Apache-2.0",
+	"icon": "assets/drop2inv/icon.png",
+
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"com.guayand0.Drop2InvClient"
+		],
+		"main": [
+			"com.guayand0.Drop2Inv"
+		],
+		"modmenu": [
+			"com.guayand0.config.compat.modmenu.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"drop2inv.mixins.json"
+	],
+
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "26.1",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+
+	"recommends": {
+		"modmenu": "*",
+		"cloth-config": "*"
+	},
+
+	"custom": {
+		"modmenu": {
+			"links": {
+				"Modrinth": "https://modrinth.com/mod/drop2inv",
+        "Discord": "https://discord.com/invite/xsmM4a2Tg"
+			}
+		}
+	}
+}

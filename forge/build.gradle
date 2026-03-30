@@ -1,0 +1,82 @@
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '[7.0.17,8)'
+}
+
+base {
+    archivesName = 'drop2inv-forge'
+}
+
+version = rootProject.version
+group = rootProject.group
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', '../common/src/main/java', '../fabric/src/main/java']
+            exclude 'com/guayand0/Drop2Inv.java'
+            exclude 'com/guayand0/Drop2InvClient.java'
+            exclude 'com/misterpemodder/**'
+            exclude 'com/guayand0/blocks/BlockBreakHandler.java'
+            exclude 'com/guayand0/blocks/DropCancelHandler.java'
+            exclude 'com/guayand0/config/compat/**'
+            exclude 'com/guayand0/fabric/**'
+        }
+        resources {
+            srcDirs = ['src/main/resources', '../common/src/main/resources', '../fabric/src/main/resources']
+            exclude 'fabric.mod.json'
+            exclude 'META-INF/neoforge.mods.toml'
+        }
+    }
+}
+
+minecraft {
+    runs {
+        configureEach {
+            workingDir = layout.projectDirectory.dir('run')
+        }
+
+        register('client')
+
+        register('server') {
+            args '--nogui'
+        }
+    }
+}
+
+repositories {
+    minecraft.mavenizer(it)
+    maven fg.forgeMaven
+    maven fg.minecraftLibsMaven
+    maven { url 'https://maven.shedaniel.me/' }
+    maven { url 'https://maven.terraformersmc.com/releases/' }
+    mavenCentral()
+}
+
+dependencies {
+    implementation minecraft.dependency("net.minecraftforge:forge:${rootProject.findProperty('forge_version')}")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 25
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'description', rootProject.findProperty('project_description')
+
+    filesMatching('META-INF/mods.toml') {
+        expand 'version': project.version, 'description': rootProject.findProperty('project_description')
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                'MixinConfigs': 'drop2inv.mixins.json'
+        )
+    }
+}

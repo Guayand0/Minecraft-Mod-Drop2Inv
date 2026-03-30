@@ -1,0 +1,51 @@
+{
+  "drop2inv.title": "Drop2Inv",
+
+
+  "drop2inv.no_cloth_config.L1": "Cloth Config no está instalado",
+  "drop2inv.no_cloth_config.L2": "Instálalo para editar la configuración",
+
+
+  "drop2inv.category.general": "General",
+  "drop2inv.category.general.enabled": "Habilitar mod",
+  "drop2inv.category.general.enabled.@Tooltip": "Si está activado, el mod funciona",
+
+
+  "drop2inv.category.blocks": "Bloques",
+  "drop2inv.category.blocks.blocks_to_inv": "Drops al inventario",
+  "drop2inv.category.blocks.blocks_to_inv.@Tooltip": "Si está activado, los drops al romper bloques irán directos al inventario",
+  "drop2inv.category.blocks.special": "Funciones especiales",
+  "drop2inv.category.blocks.special.break_tree_logs": "Troncos de árbol",
+  "drop2inv.category.blocks.special.break_tree_logs.@Tooltip": "Si está activado, al romper un tronco de árbol se rompen todos los troncos de ese árbol",
+  "drop2inv.category.blocks.special.break_tree_leaf": "Hojas de árbol",
+  "drop2inv.category.blocks.special.break_tree_leaf.@Tooltip": "Si está activado, al rompen todos los troncos de un árbol también se rompen las hojas (solo funciona si Troncos de árbol está activado)",
+  "drop2inv.category.blocks.special.break_giant_mushroom": "Setas gigantes (experimental)",
+  "drop2inv.category.blocks.special.break_giant_mushroom.@Tooltip": "Si está activado, al romper un tallo de seta gigante se rompe toda la seta gigante",
+  "drop2inv.category.blocks.special.break_crops": "Cultivos",
+  "drop2inv.category.blocks.special.break_crops.@Tooltip": "Si está activado, los drops al romper cultivos irán directos al inventario",
+  "drop2inv.category.blocks.special.break_vertical": "Bloques verticales",
+  "drop2inv.category.blocks.special.break_vertical.@Tooltip": "Si está activado, los drops de los bloques que crecen en vertical como bambú, cactus, caña de azúcar y algas irán directos al inventario",
+  "drop2inv.category.blocks.special.break_chorus": "Planta chorus",
+  "drop2inv.category.blocks.special.break_chorus.@Tooltip": "Si está activado, los drops al romper plantas de chorus irán directos al inventario",
+
+
+  "drop2inv.category.mobs": "Mobs",
+  "drop2inv.category.mobs.mobs_to_inv": "Drops al inventario",
+  "drop2inv.category.mobs.mobs_to_inv.@Tooltip": "Si está activado, los drops al matar mobs irán directos al inventario",
+  "drop2inv.category.mobs.category": "Por categoría",
+  "drop2inv.category.mobs.category.hostile": "Hostiles",
+  "drop2inv.category.mobs.category.hostile.@Tooltip": "Si está activado, los drops al matar mobs hostiles irán directos al inventario",
+  "drop2inv.category.mobs.category.neutral": "Neutros",
+  "drop2inv.category.mobs.category.neutral.@Tooltip": "Si está activado, los drops al matar mobs neutros irán directos al inventario",
+  "drop2inv.category.mobs.category.passive": "Pacíficos",
+  "drop2inv.category.mobs.category.passive.@Tooltip": "Si está activado, los drops al matar mobs pacíficos irán directos al inventario",
+  "drop2inv.category.mobs.per_mob_category": "Categoría por mob",
+  "drop2inv.category.mobs.per_mob_category.individual.@Tooltip": "Categoría para: %s",
+  "drop2inv.category.mobs.special": "Funciones especiales",
+  "drop2inv.category.mobs.special.sheep_shear": "Esquilar oveja",
+  "drop2inv.category.mobs.special.sheep_shear.@Tooltip": "Si está activado, los drops al esquilar ovejas irán directos al inventario",
+
+
+  "modmenu.summaryTranslation.drop2inv": "Agrega la función de que al romper bloques y matar mobs los drops vayan directos al inventario",
+  "modmenu.descriptionTranslation.drop2inv": "Agrega la función de que al romper bloques y matar mobs los drops vayan directos al inventario"
+}

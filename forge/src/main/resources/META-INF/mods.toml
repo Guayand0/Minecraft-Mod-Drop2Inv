@@ -1,0 +1,27 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+issueTrackerURL = "https://github.com/Guayand0/Minecraft-Mod-Fabric-Drop2Inv/issues"
+displayURL = "https://modrinth.com/mod/drop2inv"
+license = "Apache-2.0"
+
+[[mods]]
+modId = "drop2inv"
+version = "${version}"
+displayName = "Drop2Inv"
+authors = "Guayand0"
+description = "${description}"
+logoFile = "assets/drop2inv/icon.png"
+
+[[dependencies.drop2inv]]
+modId = "forge"
+mandatory = true
+versionRange = "[62.0.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.drop2inv]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[26.1,)"
+ordering = "NONE"
+side = "BOTH"

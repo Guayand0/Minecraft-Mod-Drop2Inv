@@ -1,0 +1,29 @@
+base {
+    archivesName = "${rootProject.project_base_name}-common"
+}
+
+architectury {
+    common(rootProject.enabled_platforms.split(','))
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', '../fabric/src/main/java']
+            exclude 'com/guayand0/Drop2Inv.java'
+            exclude 'com/guayand0/Drop2InvClient.java'
+            exclude 'com/guayand0/blocks/BlockBreakHandler.java'
+            exclude 'com/guayand0/blocks/DropCancelHandler.java'
+            exclude 'com/guayand0/config/Drop2InvConfigManager.java'
+            exclude 'com/guayand0/config/compat/**'
+        }
+        resources {
+            srcDirs = ['src/main/resources', '../fabric/src/main/resources']
+            exclude 'fabric.mod.json'
+        }
+    }
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+}

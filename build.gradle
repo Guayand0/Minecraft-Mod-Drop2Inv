@@ -1,0 +1,77 @@
+plugins {
+    id 'base'
+}
+
+def enabledPlatforms = (findProperty('enabled_platforms') ?: 'fabric,quilt,forge,neoforge')
+        .split(',')
+        .collect { it.trim() }
+        .findAll { !it.isEmpty() }
+
+def hasFabricRuntime = enabledPlatforms.contains('fabric') || enabledPlatforms.contains('quilt')
+
+allprojects {
+    group = findProperty('project_group')
+    version = "${findProperty('project_version')}+${findProperty('mc_version')}"
+
+    repositories {
+        maven { url 'https://maven.fabricmc.net/' }
+        maven { url 'https://maven.neoforged.net/releases' }
+        maven { url 'https://maven.shedaniel.me/' }
+        maven { url 'https://maven.terraformersmc.com/releases/' }
+        mavenCentral()
+    }
+}
+
+tasks.register('universalJar', Jar) {
+    group = 'build'
+    description = 'Builds a dual-loader jar that contains the enabled loader metadata.'
+    archiveBaseName.set("${findProperty('project_base_name')}-universal")
+    archiveVersion.set(project.version.toString())
+    archiveClassifier.set('')
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    if (hasFabricRuntime && project.findProject(':fabric') != null) {
+        dependsOn ':fabric:jar'
+        from {
+            zipTree(project(':fabric').tasks.named('jar').get().archiveFile.get().asFile)
+        }
+    }
+    if (enabledPlatforms.contains('forge') && project.findProject(':forge') != null) {
+        dependsOn ':forge:jar'
+        from {
+            zipTree(project(':forge').tasks.named('jar').get().archiveFile.get().asFile)
+        }
+    }
+    if (enabledPlatforms.contains('neoforge') && project.findProject(':neoforge') != null) {
+        dependsOn ':neoforge:jar'
+        from {
+            zipTree(project(':neoforge').tasks.named('jar').get().archiveFile.get().asFile)
+        }
+    }
+}
+
+tasks.register('quiltJar', Copy) {
+    group = 'build'
+    description = 'Builds a Quilt-compatible jar by reusing the Fabric target.'
+    dependsOn ':fabric:jar'
+    onlyIf { enabledPlatforms.contains('quilt') && project.findProject(':fabric') != null }
+    from(project(':fabric').tasks.named('jar').map { it.archiveFile })
+    into(layout.buildDirectory.dir('distributions'))
+    rename { "drop2inv-quilt-${project.version}.jar" }
+}
+
+tasks.named('build') {
+    if (enabledPlatforms.contains('fabric') && project.findProject(':fabric') != null) {
+        dependsOn ':fabric:build'
+    }
+    if (enabledPlatforms.contains('forge') && project.findProject(':forge') != null) {
+        dependsOn ':forge:build'
+    }
+    if (enabledPlatforms.contains('neoforge') && project.findProject(':neoforge') != null) {
+        dependsOn ':neoforge:build'
+    }
+    if (enabledPlatforms.contains('quilt') && project.findProject(':fabric') != null) {
+        dependsOn tasks.named('quiltJar')
+    }
+    dependsOn tasks.named('universalJar')
+}

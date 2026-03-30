@@ -1,0 +1,7 @@
+{
+  "parent": "drop2inv-common.mixins.json",
+  "package": "dev.guayand0.drop2inv.mixin",
+  "client": [
+    "client.forge.AbstractContainerScreenMixin"
+  ]
+}

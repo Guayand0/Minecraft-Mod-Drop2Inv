@@ -1,0 +1,32 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        maven { url 'https://maven.fabricmc.net/' }
+        maven { url 'https://maven.neoforged.net/releases' }
+        maven { url 'https://maven.architectury.dev/' }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+def gradleProps = new Properties()
+file('gradle.properties').withInputStream { gradleProps.load(it) }
+def enabledPlatforms = gradleProps.getProperty('enabled_platforms', 'fabric,quilt,forge,neoforge')
+        .split(',')
+        .collect { it.trim() }
+        .findAll { !it.isEmpty() }
+
+if (enabledPlatforms.contains('fabric') || enabledPlatforms.contains('quilt')) {
+    include('fabric')
+}
+if (enabledPlatforms.contains('forge')) {
+    include('forge')
+}
+if (enabledPlatforms.contains('neoforge')) {
+    include('neoforge')
+}
+
+rootProject.name = 'Drop2Inv'

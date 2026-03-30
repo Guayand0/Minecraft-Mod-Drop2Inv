@@ -1,0 +1,51 @@
+{
+  "drop2inv.title": "Drop2Inv",
+
+
+  "drop2inv.no_cloth_config.L1": "Cloth Config is not installed",
+  "drop2inv.no_cloth_config.L2": "Install it to edit the configuration",
+
+
+  "drop2inv.category.general": "General",
+  "drop2inv.category.general.enabled": "Enable mod",
+  "drop2inv.category.general.enabled.@Tooltip": "If enabled, the mod is active",
+
+
+  "drop2inv.category.blocks": "Blocks",
+  "drop2inv.category.blocks.blocks_to_inv": "Drops to inventory",
+  "drop2inv.category.blocks.blocks_to_inv.@Tooltip": "If enabled, block drops will go directly to the inventory",
+  "drop2inv.category.blocks.special": "Special features",
+  "drop2inv.category.blocks.special.break_tree_logs": "Tree logs",
+  "drop2inv.category.blocks.special.break_tree_logs.@Tooltip": "If enabled, breaking a tree log will break all the logs of that tree",
+  "drop2inv.category.blocks.special.break_tree_leaf": "Tree leaves",
+  "drop2inv.category.blocks.special.break_tree_leaf.@Tooltip": "If enabled, when all logs of a tree are broken, the leaves will also break (only works if Tree logs is enabled)",
+  "drop2inv.category.blocks.special.break_giant_mushroom": "Giant mushrooms (experimental)",
+  "drop2inv.category.blocks.special.break_giant_mushroom.@Tooltip": "If enabled, breaking a giant mushroom steam will break all the giant mushroom",
+  "drop2inv.category.blocks.special.break_crops": "Crops",
+  "drop2inv.category.blocks.special.break_crops.@Tooltip": "If enabled, breaking crops will send drops directly to the inventory",
+  "drop2inv.category.blocks.special.break_vertical": "Vertical blocks",
+  "drop2inv.category.blocks.special.break_vertical.@Tooltip": "If enabled, drops from vertically growing blocks like bamboo, cactus, sugarcane, and kelp will go directly to the inventory",
+  "drop2inv.category.blocks.special.break_chorus": "Chorus plant",
+  "drop2inv.category.blocks.special.break_chorus.@Tooltip": "If enabled, breaking chorus plants will send drops directly to the inventory",
+
+
+  "drop2inv.category.mobs": "Mobs",
+  "drop2inv.category.mobs.mobs_to_inv": "Drops to inventory",
+  "drop2inv.category.mobs.mobs_to_inv.@Tooltip": "If enabled, mob drops will go directly to the inventory",
+  "drop2inv.category.mobs.category": "By Category",
+  "drop2inv.category.mobs.category.hostile": "Hostile",
+  "drop2inv.category.mobs.category.hostile.@Tooltip": "If enabled, drops from hostile mobs will go directly to the inventory",
+  "drop2inv.category.mobs.category.neutral": "Neutral",
+  "drop2inv.category.mobs.category.neutral.@Tooltip": "If enabled, drops from neutral mobs will go directly to the inventory",
+  "drop2inv.category.mobs.category.passive": "Peaceful",
+  "drop2inv.category.mobs.category.passive.@Tooltip": "If enabled, drops from peaceful mobs will go directly to the inventory",
+  "drop2inv.category.mobs.per_mob_category": "Category by Mob",
+  "drop2inv.category.mobs.per_mob_category.individual.@Tooltip": "Category for: %s",
+  "drop2inv.category.mobs.special": "Special features",
+  "drop2inv.category.mobs.special.sheep_shear": "Sheep shearing",
+  "drop2inv.category.mobs.special.sheep_shear.@Tooltip": "If enabled, drops from shearing sheep will go directly into the inventory",
+
+
+  "modmenu.summaryTranslation.drop2inv": "Adds the function of receive block and mob drops directly to the inventory",
+  "modmenu.descriptionTranslation.drop2inv": "Adds the function of receive block and mob drops directly to the inventory"
+}

@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"package": "com.guayand0.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"MobDropMixin",
+		"SheepShearMixin",
+		"SheepInteractMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
