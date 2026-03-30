@@ -4,7 +4,7 @@
 ### https://modrinth.com/mod/drop2inv/versions
 
 
-- 1.21.2 - 1.21.11
+- 1.20.5 - 1.21.11
 - 26.1
 
 
