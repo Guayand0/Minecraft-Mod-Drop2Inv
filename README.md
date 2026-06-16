@@ -6,8 +6,7 @@
 
 - 1.20.5 - 1.21.11
 - 26.1
-
-# Requirements
+- 26.2
 
 ## Fabric
 | MC               | Mod   | Minimum Loader | Java | Minimum Dependencies       | Optional (Recommended)                           |
