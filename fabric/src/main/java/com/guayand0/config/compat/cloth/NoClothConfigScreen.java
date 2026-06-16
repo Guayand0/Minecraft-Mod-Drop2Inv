@@ -45,7 +45,7 @@ public class NoClothConfigScreen extends Screen {
 
         // Botón volver
         this.addRenderableWidget(Button.builder(Component.literal("Volver"), button ->
-                        this.minecraft.setScreen(parent)).bounds(centerX - 50, buttonY, 100, 20).build()
+                        this.minecraft.setScreenAndShow(parent)).bounds(centerX - 50, buttonY, 100, 20).build()
         );
     }
 
