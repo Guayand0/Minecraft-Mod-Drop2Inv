@@ -3,6 +3,7 @@ package com.guayand0.forge;
 import com.guayand0.Drop2InvCommon;
 import com.guayand0.blocks.CommonBlockBreakHooks;
 import com.guayand0.blocks.CommonItemEntityHooks;
+import com.guayand0.blocks.DropTracker;
 import com.guayand0.config.Drop2InvConfig;
 import com.guayand0.config.Drop2InvConfigManager;
 import com.guayand0.mobs.MobCategory;
@@ -49,6 +50,12 @@ public final class Drop2InvForge {
 
     private boolean onBlockBreak(BlockEvent.BreakEvent event) {
         if (!(event.getLevel() instanceof ServerLevel serverLevel) || !(event.getPlayer() instanceof ServerPlayer serverPlayer)) {
+            return false;
+        }
+
+        Drop2InvConfig config = Drop2InvConfigManager.get();
+        if (!config.enabled || !config.blocks.blocks_to_inv) {
+            DropTracker.clear();
             return false;
         }
 

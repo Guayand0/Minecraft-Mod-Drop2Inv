@@ -60,7 +60,7 @@ public final class ForgeConfigScreen extends Screen {
         this.addRenderableWidget(Button.builder(Component.literal("Save"), button -> saveAndClose())
                 .bounds(this.width / 2 - 102, footerY, 100, 20)
                 .build());
-        this.addRenderableWidget(Button.builder(Component.literal("Cancel"), button -> this.minecraft.setScreen(parent))
+        this.addRenderableWidget(Button.builder(Component.literal("Cancel"), button -> this.minecraft.setScreenAndShow(parent))
                 .bounds(this.width / 2 + 2, footerY, 100, 20)
                 .build());
     }
@@ -221,7 +221,7 @@ public final class ForgeConfigScreen extends Screen {
 
         try {
             Drop2InvConfigManager.save();
-            this.minecraft.setScreen(parent);
+            this.minecraft.setScreenAndShow(parent);
         } catch (IOException exception) {
             Drop2InvCommon.LOGGER.error("Failed to save Drop2Inv config", exception);
         }
