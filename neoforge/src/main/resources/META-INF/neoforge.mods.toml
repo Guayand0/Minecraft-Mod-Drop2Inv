@@ -13,7 +13,7 @@ description = "${description}"
 logoFile = "assets/drop2inv/icon.png"
 
 [[mixins]]
-config = "drop2inv.mixins.json"
+config = "drop2inv-neoforge.mixins.json"
 
 [[dependencies.drop2inv]]
 modId = "neoforge"

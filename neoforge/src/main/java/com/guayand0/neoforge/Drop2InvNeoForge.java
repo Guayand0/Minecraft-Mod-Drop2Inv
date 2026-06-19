@@ -1,8 +1,6 @@
 package com.guayand0.neoforge;
 
 import com.guayand0.Drop2InvCommon;
-import com.guayand0.blocks.CommonBlockBreakHooks;
-import com.guayand0.blocks.CommonItemEntityHooks;
 import com.guayand0.config.Drop2InvConfig;
 import com.guayand0.config.Drop2InvConfigManager;
 import com.guayand0.mobs.MobCategory;
@@ -16,7 +14,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.sheep.Sheep;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -25,10 +22,8 @@ import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
 
 @Mod(Drop2InvCommon.MOD_ID)
 public final class Drop2InvNeoForge {
@@ -37,8 +32,6 @@ public final class Drop2InvNeoForge {
         Drop2InvCommon.init(FMLPaths.CONFIGDIR.get());
         Drop2InvCommon.initClient(FMLPaths.CONFIGDIR.get());
 
-        NeoForge.EVENT_BUS.addListener(this::onBlockBreak);
-        NeoForge.EVENT_BUS.addListener(this::onEntityJoinLevel);
         NeoForge.EVENT_BUS.addListener(this::onLivingDrops);
         NeoForge.EVENT_BUS.addListener(this::onEntityInteract);
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, new IConfigScreenFactory() {
@@ -47,27 +40,6 @@ public final class Drop2InvNeoForge {
                 return new NeoForgeConfigScreen(parent);
             }
         });
-    }
-
-    private void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (!(event.getLevel() instanceof ServerLevel serverLevel) || !(event.getPlayer() instanceof ServerPlayer serverPlayer)) {
-            return;
-        }
-
-        if (CommonBlockBreakHooks.shouldCancelBreak(serverLevel, serverPlayer, event.getPos(), event.getState(), serverLevel.getBlockEntity(event.getPos()))) {
-            event.setCanceled(true);
-        }
-    }
-
-    private void onEntityJoinLevel(EntityJoinLevelEvent event) {
-        if (!(event.getEntity() instanceof ItemEntity itemEntity)) {
-            return;
-        }
-
-        if (CommonItemEntityHooks.shouldDiscard(itemEntity)) {
-            event.setCanceled(true);
-            itemEntity.discard();
-        }
     }
 
     private void onLivingDrops(LivingDropsEvent event) {
@@ -118,4 +90,5 @@ public final class Drop2InvNeoForge {
             }
         }
     }
+
 }
