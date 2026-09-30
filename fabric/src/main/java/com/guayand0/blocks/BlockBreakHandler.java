@@ -8,7 +8,7 @@ import com.guayand0.blocks.utils.TreeUtils;
 import com.guayand0.config.Drop2InvConfigManager;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.AxeItem;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -38,7 +38,7 @@ public class BlockBreakHandler {
             // LOGS
             if (config.blocks.break_tree_logs && TreeUtils.isLog(state)) {
                 ItemStack held = player.getMainHandItem();
-                if (held.getItem() instanceof AxeItem) {
+                if (held.is(item -> item.is(ItemTags.AXES))) {
                     TreeBreakHandler.breakTree(serverWorld, player, pos);
                     DropTracker.mark(pos);
                     return false;

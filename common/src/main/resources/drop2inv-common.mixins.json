@@ -1,10 +1,14 @@
 {
-  "parent": "drop2inv-common.mixins.json",
   "required": true,
   "package": "com.guayand0.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ServerPlayerGameModeMixin"
+    "VehicleEntityMixin",
+    "AbstractMinecartContainerMixin",
+    "AbstractChestBoatMixin",
+    "ArmorStandMixin",
+    "MinecartTNTMixin",
+    "ItemFrameMixin"
   ],
   "injectors": {
     "defaultRequire": 1

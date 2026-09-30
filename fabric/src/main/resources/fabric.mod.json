@@ -30,6 +30,7 @@
 		]
 	},
 	"mixins": [
+		"drop2inv-common.mixins.json",
 		"drop2inv.mixins.json"
 	],
 

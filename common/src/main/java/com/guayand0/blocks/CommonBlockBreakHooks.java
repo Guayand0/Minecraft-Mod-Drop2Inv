@@ -5,10 +5,12 @@ import com.guayand0.blocks.utils.MushroomUtils;
 import com.guayand0.blocks.utils.TreeUtils;
 import com.guayand0.config.Drop2InvConfig;
 import com.guayand0.config.Drop2InvConfigManager;
+import com.guayand0.containers.ContainerDropUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.AxeItem;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,15 +28,48 @@ public final class CommonBlockBreakHooks {
         }
 
         Drop2InvConfig config = Drop2InvConfigManager.get();
-        if (!config.enabled || !config.blocks.blocks_to_inv) {
+        if (!config.enabled) {
             return false;
         }
 
         Block block = state.getBlock();
 
+        if (blockEntity instanceof Container container) {
+            boolean handledContainer = ContainerDropUtils.shouldHandleBlockContainer(state, blockEntity, config);
+
+            if (config.blocks.blocks_to_inv) {
+                if (handledContainer) {
+                    ItemStack tool = player.getMainHandItem();
+                    if (state.requiresCorrectToolForDrops() && !tool.isCorrectToolForDrops(state)) {
+                        return false;
+                    }
+
+                    DropUtils.giveDrops(level, player, pos, state, null);
+                    ContainerDropUtils.transferBlockContainerContents(level, player, pos, container);
+                    if (level.destroyBlock(pos, false)) {
+                        tool.mineBlock(level, state, pos, player);
+                    }
+                    return true;
+                }
+
+                DropTracker.mark(pos);
+                DropUtils.breakBlockToInventory(level, player, pos, state, blockEntity);
+                return true;
+            }
+
+            if (handledContainer) {
+                ContainerDropUtils.transferBlockContainerContents(level, player, pos, container);
+            }
+            return false;
+        }
+
+        if (!config.blocks.blocks_to_inv) {
+            return false;
+        }
+
         if (config.blocks.break_tree_logs && TreeUtils.isLog(state)) {
             ItemStack held = player.getMainHandItem();
-            if (held.getItem() instanceof AxeItem) {
+            if (held.is(item -> item.is(ItemTags.AXES))) {
                 TreeBreakHandler.breakTree(level, player, pos);
                 DropTracker.mark(pos);
                 return true;

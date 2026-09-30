@@ -9,17 +9,19 @@ import com.guayand0.mobs.utils.MobUtils;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Shearable;
 import net.minecraft.world.entity.animal.sheep.Sheep;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
@@ -58,7 +60,7 @@ public final class Drop2InvNeoForge {
         event.getDrops().removeIf(item -> MobDropLogic.give(player, item.getItem(), category));
     }
 
-    private void onEntityInteract(PlayerInteractEvent.EntityInteractSpecific event) {
+    private void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         if (!(event.getTarget() instanceof Sheep sheep)) {
             return;
         }
@@ -76,14 +78,11 @@ public final class Drop2InvNeoForge {
                 return;
             }
 
-            if (sheep instanceof IShearable shearable && sheep.level() instanceof ServerLevel serverLevel && shearable.isShearable(player, player.getItemInHand(event.getHand()), serverLevel, sheep.blockPosition())) {
+            if (sheep instanceof Shearable shearable && sheep.level() instanceof ServerLevel serverLevel && shearable.readyForShearing()) {
                 MobCategory category = MobUtils.getCategory(sheep.getType());
-                shearable.onSheared(player, player.getItemInHand(event.getHand()), serverLevel, sheep.blockPosition())
-                        .forEach(drop -> {
-                            if (!MobDropLogic.give(player, drop, category)) {
-                                shearable.spawnShearedDrop(serverLevel, sheep.blockPosition(), drop);
-                            }
-                        });
+                shearable.shear(serverLevel, SoundSource.PLAYERS, player.getItemInHand(event.getHand()));
+                serverLevel.getEntitiesOfClass(ItemEntity.class, sheep.getBoundingBox(), item -> item.tickCount <= 1)
+                        .forEach(item -> MobDropLogic.give(player, item, category));
                 player.getItemInHand(event.getHand()).hurtAndBreak(1, player, event.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                 event.setCancellationResult(InteractionResult.SUCCESS);
                 event.setCanceled(true);

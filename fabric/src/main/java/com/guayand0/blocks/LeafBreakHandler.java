@@ -72,7 +72,8 @@ public class LeafBreakHandler {
                 // Romper hoja
                 BlockState state = world.getBlockState(hoja);
                 DropTracker.mark(hoja);
-                DropUtils.breakBlockToInventory(world, player, hoja, state, null);
+                DropUtils.giveDrops(world, player, hoja, state, null);
+                world.destroyBlock(hoja, false);
             }
             // si minDistVecino <= minDistRoto → hoja pertenece a otro árbol → no romper
         }

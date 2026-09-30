@@ -48,6 +48,8 @@ public class ClothConfigCompat {
                         }).build()
         );
 
+
+
         ConfigCategory blocks = builder.getOrCreateCategory(Component.translatable(CONFIG_VALUE + "blocks"));
         blocks.addEntry(
                 entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "blocks.blocks_to_inv"), config.blocks.blocks_to_inv)
@@ -168,6 +170,187 @@ public class ClothConfigCompat {
             );
         }
         mobs.addEntry(perMobCategory.build());
+
+        ConfigCategory entities = builder.getOrCreateCategory(Component.translatable(CONFIG_VALUE + "entities"));
+        entities.addEntry(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.entities_to_inv"), config.entities.entities_to_inv)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.entities_to_inv.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.entities_to_inv)
+                        .setSaveConsumer(v -> config.entities.entities_to_inv = v).build()
+        );
+
+        SubCategoryBuilder entitiesSpecial = entry.startSubCategory(Component.translatable(CONFIG_VALUE + "entities.special"));
+        entitiesSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.boats"), config.entities.boats)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.boats.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.boats)
+                        .setSaveConsumer(v -> config.entities.boats = v).build()
+        );
+        entitiesSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.chest_boats"), config.entities.chest_boats)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.chest_boats.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.chest_boats)
+                        .setSaveConsumer(v -> config.entities.chest_boats = v).build()
+        );
+        entitiesSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.minecarts"), config.entities.minecarts)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.minecarts.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.minecarts)
+                        .setSaveConsumer(v -> config.entities.minecarts = v).build()
+        );
+        entitiesSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.special_minecarts"), config.entities.special_minecarts)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.special_minecarts.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.special_minecarts)
+                        .setSaveConsumer(v -> config.entities.special_minecarts = v).build()
+        );
+        entitiesSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.armor_stand"), config.entities.armor_stand)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.armor_stand.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.armor_stand)
+                        .setSaveConsumer(v -> config.entities.armor_stand = v).build()
+        );
+        entitiesSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.item_frames"), config.entities.item_frames)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.item_frames.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.item_frames)
+                        .setSaveConsumer(v -> config.entities.item_frames = v).build()
+        );
+        entities.addEntry(entitiesSpecial.build());
+
+        ConfigCategory containers = builder.getOrCreateCategory(Component.translatable(CONFIG_VALUE + "containers"));
+        containers.addEntry(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.containers_to_inv"), config.containers.containers_to_inv)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.containers_to_inv.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.containers_to_inv)
+                        .setSaveConsumer(v -> config.containers.containers_to_inv = v).build()
+        );
+
+        SubCategoryBuilder containersSpecial = entry.startSubCategory(Component.translatable(CONFIG_VALUE + "containers.special"));
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.chest"), config.containers.chest)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.chest.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.chest)
+                        .setSaveConsumer(v -> config.containers.chest = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.trapped_chest"), config.containers.trapped_chest)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.trapped_chest.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.trapped_chest)
+                        .setSaveConsumer(v -> config.containers.trapped_chest = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.copper_chests"), config.containers.copper_chests)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.copper_chests.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.copper_chests)
+                        .setSaveConsumer(v -> config.containers.copper_chests = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.barrel"), config.containers.barrel)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.barrel.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.barrel)
+                        .setSaveConsumer(v -> config.containers.barrel = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.dropper"), config.containers.dropper)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.dropper.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.dropper)
+                        .setSaveConsumer(v -> config.containers.dropper = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.dispenser"), config.containers.dispenser)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.dispenser.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.dispenser)
+                        .setSaveConsumer(v -> config.containers.dispenser = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.furnace"), config.containers.furnace)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.furnace.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.furnace)
+                        .setSaveConsumer(v -> config.containers.furnace = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.smoker"), config.containers.smoker)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.smoker.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.smoker)
+                        .setSaveConsumer(v -> config.containers.smoker = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.blast_furnace"), config.containers.blast_furnace)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.blast_furnace.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.blast_furnace)
+                        .setSaveConsumer(v -> config.containers.blast_furnace = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.hopper"), config.containers.hopper)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.hopper.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.hopper)
+                        .setSaveConsumer(v -> config.containers.hopper = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.crafter"), config.containers.crafter)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.crafter.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.crafter)
+                        .setSaveConsumer(v -> config.containers.crafter = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.decorated_pot"), config.containers.decorated_pot)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.decorated_pot.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.decorated_pot)
+                        .setSaveConsumer(v -> config.containers.decorated_pot = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.jukebox"), config.containers.jukebox)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.jukebox.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.jukebox)
+                        .setSaveConsumer(v -> config.containers.jukebox = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.brewing_stand"), config.containers.brewing_stand)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.brewing_stand.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.brewing_stand)
+                        .setSaveConsumer(v -> config.containers.brewing_stand = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.bookshelf"), config.containers.bookshelf)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.bookshelf.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.bookshelf)
+                        .setSaveConsumer(v -> config.containers.bookshelf = v).build()
+        );
+        containersSpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.shelves"), config.containers.shelves)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.shelves.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.containers.shelves)
+                        .setSaveConsumer(v -> config.containers.shelves = v).build()
+        );
+        containers.addEntry(containersSpecial.build());
+
+        SubCategoryBuilder containersEntitySpecial = entry.startSubCategory(Component.translatable(CONFIG_VALUE + "containers.special_entities"));
+        containersEntitySpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "containers.special.chest_boats"), config.entities.chest_boats)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "containers.special.chest_boats.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.chest_boats)
+                        .setSaveConsumer(v -> config.entities.chest_boats = v).build()
+        );
+        containersEntitySpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.special_minecarts"), config.entities.special_minecarts)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.special_minecarts.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.special_minecarts)
+                        .setSaveConsumer(v -> config.entities.special_minecarts = v).build()
+        );
+        containersEntitySpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.item_frames"), config.entities.item_frames)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.item_frames.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.item_frames)
+                        .setSaveConsumer(v -> config.entities.item_frames = v).build()
+        );
+        containersEntitySpecial.add(
+                entry.startBooleanToggle(Component.translatable(CONFIG_VALUE + "entities.special.armor_stand"), config.entities.armor_stand)
+                        .setTooltip(Component.translatable(CONFIG_VALUE + "entities.special.armor_stand.@Tooltip"))
+                        .setDefaultValue(Drop2InvConfig.DEFAULTS.entities.armor_stand)
+                        .setSaveConsumer(v -> config.entities.armor_stand = v).build()
+        );
+        containers.addEntry(containersEntitySpecial.build());
 
         return builder.build();
     }
